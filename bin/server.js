@@ -29,6 +29,11 @@ var server = http.createServer(function (request, response) {
 
     var realPath = "." + decodeURIComponent(pathname);
     console.log(realPath);
+
+    if (realPath === "./") {
+        realPath = "./index.html"
+    }
+
     var ext = path.extname(realPath);
     ext = ext ? ext.slice(1) : 'unknown';
     fs.exists(realPath, function (exists) {
@@ -58,7 +63,7 @@ var server = http.createServer(function (request, response) {
         }
     });
 });
+let port = 8082;
+server.listen(port);
 
-server.listen(8080);
-
-console.log("server listen 8080");
+console.log(`server listen localhost:${port}`);

@@ -9,8 +9,8 @@ var mine = {
     "ico": "image/x-icon",
     "jpeg": "image/jpeg",
     "jpg": "image/jpeg",
-    "js": "text/javascript",
-    "json": "application/json",
+    "js": "text/javascript;charset=utf-8",
+    "json": "application/json;charset=utf-8",
     "pdf": "application/pdf",
     "png": "image/png",
     "svg": "image/svg+xml",
@@ -24,17 +24,17 @@ var mine = {
     "xml": "text/xml"
 };
 
-var server = http.createServer(function (request, response) {
-    var pathname = url.parse(request.url).pathname;
+let server = http.createServer(function (request, response) {
+    let pathname = url.parse(request.url).pathname;
 
-    var realPath = "." + decodeURIComponent(pathname);
-    console.log(realPath);
+    let realPath = "." + decodeURIComponent(pathname);
+    console.log(`realPath:${realPath}`);
 
     if (realPath === "./") {
         realPath = "./index.html"
     }
 
-    var ext = path.extname(realPath);
+    let ext = path.extname(realPath);
     ext = ext ? ext.slice(1) : 'unknown';
     fs.exists(realPath, function (exists) {
         if (!exists) {
@@ -52,7 +52,7 @@ var server = http.createServer(function (request, response) {
                     });
                     response.end(err);
                 } else {
-                    var contentType = mine[ext] || "text/plain;charset=utf-8";
+                    let contentType = mine[ext] || "text/plain;charset=utf-8";
                     response.writeHead(200, {
                         'Content-Type': contentType
                     });

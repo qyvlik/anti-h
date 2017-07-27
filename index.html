@@ -29,7 +29,18 @@
 <script src="javascripts/main.js"></script>
 
 <script>
-    loadPost("postContent", "/posts/data/QML 中的屏幕适配问题.md");
+     window.onload = function() {
+         if (window.location.search === '') {
+             lostPostList(function(){
+                 showPostList("postContent");
+             });
+         } else {
+             lostPostList(function(){
+                 var p = getQueryString("p");
+                 lostPostByP("postContent", p);
+             });
+         }
+     }
 </script>
 
 </body>
